@@ -1,0 +1,15 @@
+# SydTurnstile - en_US
+ModuleSydTurnstileName=SydTurnstile
+ModuleSydTurnstileDesc=Cloudflare Turnstile as a Dolibarr captcha
+SydTurnstileSetup=SydTurnstile setup
+SydTurnstileSetupHelp=Turnstile is Cloudflare's captcha. Unlike the native graphical captcha, in managed mode it usually asks the user for nothing. Create the widget in the Cloudflare panel for this instance's domain and paste both keys here.
+SydTurnstileSitekey=Site key
+SydTurnstileSecret=Secret key
+SydTurnstileTheme=Widget theme
+SydTurnstileFailopen=Allow through if Cloudflare is unreachable
+SydTurnstileFailopenHelp=Yes is recommended. With No, an outage at Cloudflare would lock everyone out of the ERP. The token stays mandatory either way.
+SydTurnstileCaptchaDescription=Cloudflare Turnstile (frictionless for the user)
+SydTurnstileNotConfigured=Keys missing: set them on the SydTurnstile module page.
+SydTurnstileExample=The widget is shown on the login form; it usually solves itself.
+SydTurnstileFieldTitle=Security check
+SydTurnstileActivationHelp=To enable: set the keys here, then under <a href="%s">Security &gt; Captcha</a> enable the captcha and pick the "turnstile" handler.
