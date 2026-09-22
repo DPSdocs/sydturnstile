@@ -14,3 +14,4 @@ SydTurnstileNotConfigured=Keys missing: set them on the SydTurnstile module page
 SydTurnstileExample=The widget is shown on the login form; it usually solves itself.
 SydTurnstileFieldTitle=Security check
 SydTurnstileActivationHelp=To enable: set the keys here, then under <a href="%s">Security &gt; Captcha</a> enable the captcha and pick the "turnstile" handler.
+SydTurnstileVerificationFailed=Security check failed. Please try again.

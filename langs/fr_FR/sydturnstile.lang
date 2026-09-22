@@ -14,3 +14,4 @@ SydTurnstileNotConfigured=Clés manquantes : configurez-les sur la page du modul
 SydTurnstileExample=Le widget s'affiche sur le formulaire de connexion ; il se résout généralement seul.
 SydTurnstileFieldTitle=Vérification de sécurité
 SydTurnstileActivationHelp=Pour l'activer : configurez les clés ici, puis dans <a href="%s">Sécurité &gt; Captcha</a> activez le captcha et choisissez le gestionnaire « turnstile ».
+SydTurnstileVerificationFailed=La vérification de sécurité a échoué. Veuillez réessayer.

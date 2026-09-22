@@ -14,3 +14,4 @@ SydTurnstileNotConfigured=Schlüssel fehlen: auf der Seite des Moduls SydTurnsti
 SydTurnstileExample=Das Widget wird im Anmeldeformular angezeigt; es löst sich meist von selbst.
 SydTurnstileFieldTitle=Sicherheitsüberprüfung
 SydTurnstileActivationHelp=Zum Aktivieren: Schlüssel hier eintragen, dann unter <a href="%s">Sicherheit &gt; Captcha</a> das Captcha aktivieren und den Handler „turnstile" auswählen.
+SydTurnstileVerificationFailed=Die Sicherheitsüberprüfung ist fehlgeschlagen. Bitte erneut versuchen.

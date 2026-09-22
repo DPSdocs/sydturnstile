@@ -14,3 +14,4 @@ SydTurnstileNotConfigured=Faltan las claves: configúrelas en la página del mó
 SydTurnstileExample=El widget se muestra en el formulario de acceso; normalmente se resuelve solo.
 SydTurnstileFieldTitle=Verificación de seguridad
 SydTurnstileActivationHelp=Para activarlo: configure las claves aquí y luego, en <a href="%s">Seguridad &gt; Captcha</a>, active el captcha y elija el manejador «turnstile».
+SydTurnstileVerificationFailed=La verificación de seguridad falló. Intente de nuevo.

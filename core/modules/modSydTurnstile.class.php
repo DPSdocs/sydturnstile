@@ -49,8 +49,12 @@ class modSydTurnstile extends DolibarrModules
 		$this->picto = 'fa-shield-alt';
 
 		// Esta es la pieza clave: registra el directorio de manejadores de captcha del modulo.
+		// 'hooks': el webportal (public/webportal/) no dispara el captcha generico del core
+		// (MAIN_SECURITY_ENABLECAPTCHA*), asi que el widget en su login se engancha aparte, via
+		// hooks propios, reutilizando la misma clase modCaptchaTurnstile de arriba.
 		$this->module_parts = array(
 			'captcha' => 1,
+			'hooks' => array('webportal', 'webportalpage', 'login'),
 		);
 
 		$this->dirs = array();
