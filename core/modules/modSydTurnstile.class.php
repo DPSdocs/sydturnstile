@@ -35,7 +35,7 @@ class modSydTurnstile extends DolibarrModules
 		// Numero 149045: tomado del registro DPSdocs/module-registry (siguiente libre al 17-sep-2026).
 		$this->numero = 149045;
 		$this->rights_class = 'sydturnstile';
-		$this->family = 'DPS';
+		$this->family = 'SyDTech';
 		$this->module_position = '90';
 		$this->name = preg_replace('/^mod/i', '', get_class($this));
 		$this->description = 'Cloudflare Turnstile como captcha de Dolibarr';
