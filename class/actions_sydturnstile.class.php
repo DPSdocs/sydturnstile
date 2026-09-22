@@ -55,7 +55,23 @@ class ActionsSydTurnstile
 		}
 
 		$captcha = new modCaptchaTurnstile($db, $conf, $langs, $user);
+		echo '<div id="sydturnstile-webportal-wrap" style="display:none;">';
 		echo $captcha->getCaptchaCodeForForm();
+		echo '</div>';
+		// Se imprime antes del contenedor visual de la tarjeta (fuera de .login-screen__content);
+		// se reubica con JS dentro del formulario, justo antes del boton de envio -- el lugar
+		// estandar de un captcha -- y se revela (el widget en si es invisible salvo que
+		// Cloudflare pida un desafio visual, pero el wrapper arranca oculto para no dejar un
+		// hueco en blanco mientras el script de Cloudflare carga).
+		echo '<script>document.addEventListener("DOMContentLoaded", function() {
+			var cap = document.getElementById("sydturnstile-webportal-wrap");
+			var form = document.querySelector("form.login");
+			var submit = document.querySelector(".login__submit");
+			if (cap && form && submit) {
+				cap.style.display = "";
+				form.insertBefore(cap, submit);
+			}
+		});</script>';
 
 		return 0;
 	}
