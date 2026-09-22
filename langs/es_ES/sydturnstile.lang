@@ -5,6 +5,7 @@ SydTurnstileSetup=Configuración de SydTurnstile
 SydTurnstileSetupHelp=Turnstile es el captcha de Cloudflare. A diferencia del captcha gráfico nativo, en modo gestionado normalmente no pide nada al usuario: se resuelve solo en segundo plano. Cree el widget en el panel de Cloudflare (Turnstile) para el dominio de esta instancia y pegue aquí las dos claves.
 SydTurnstileSitekey=Clave de sitio (sitekey)
 SydTurnstileSecret=Clave secreta (secret)
+SydTurnstileSecretKeep=•••••••• (deje en blanco para conservar la actual)
 SydTurnstileTheme=Tema del widget
 SydTurnstileFailopen=Dejar pasar si Cloudflare no responde
 SydTurnstileFailopenHelp=Recomendado Sí. Si Cloudflare queda inalcanzable, con No nadie podría entrar al ERP. El token sigue siendo obligatorio en ambos casos.

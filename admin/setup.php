@@ -13,25 +13,31 @@
  * \brief   Configuracion de SydTurnstile
  */
 
+// Carga el entorno de Dolibarr. Patron oficial de htdocs/modulebuilder/template/admin/setup.php,
+// portado completo para que el modulo instale igual en htdocs/mymodule y en htdocs/custom/mymodule.
 $res = 0;
-$tmp = realpath(__FILE__);
-$i = 0;
-$j = 0;
-while ($i < strlen($tmp) && $j < 10) {
-	$i = strpos($tmp, '/htdocs');
-	if ($i > 0) {
-		break;
-	}
-	$j++;
+if (!$res && !empty($_SERVER["CONTEXT_DOCUMENT_ROOT"])) {
+	$res = @include $_SERVER["CONTEXT_DOCUMENT_ROOT"]."/main.inc.php";
 }
-if (!$res && file_exists(substr($tmp, 0, $i).'/main.inc.php')) {
-	$res = @include substr($tmp, 0, $i).'/main.inc.php';
+$tmp = empty($_SERVER['SCRIPT_FILENAME']) ? '' : $_SERVER['SCRIPT_FILENAME'];
+$tmp2 = realpath(__FILE__);
+$i = strlen($tmp) - 1;
+$j = strlen($tmp2) - 1;
+while ($i > 0 && $j > 0 && isset($tmp[$i]) && isset($tmp2[$j]) && $tmp[$i] == $tmp2[$j]) {
+	$i--;
+	$j--;
 }
-if (!$res && file_exists('../../main.inc.php')) {
-	$res = @include '../../main.inc.php';
+if (!$res && $i > 0 && file_exists(substr($tmp, 0, ($i + 1))."/main.inc.php")) {
+	$res = @include substr($tmp, 0, ($i + 1))."/main.inc.php";
 }
-if (!$res && file_exists('../../../main.inc.php')) {
-	$res = @include '../../../main.inc.php';
+if (!$res && $i > 0 && file_exists(dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php")) {
+	$res = @include dirname(substr($tmp, 0, ($i + 1)))."/main.inc.php";
+}
+if (!$res && file_exists("../../main.inc.php")) {
+	$res = @include "../../main.inc.php";
+}
+if (!$res && file_exists("../../../main.inc.php")) {
+	$res = @include "../../../main.inc.php";
 }
 if (!$res) {
 	die('Include of main fails');
@@ -60,6 +66,11 @@ if ($action == 'update' && $user->admin) {
 
 	foreach ($parametros as $clave => $tipo) {
 		$valor = GETPOST($clave, 'alphanohtml');
+		// El campo secret llega siempre vacio salvo que se escriba uno nuevo (no se reimprime
+		// en el HTML): un envio vacio conserva el valor ya guardado en vez de borrarlo.
+		if ($clave == 'SYDTURNSTILE_SECRET' && $valor === '') {
+			continue;
+		}
 		if (!dolibarr_set_const($db, $clave, $valor, $tipo, 0, '', $conf->entity)) {
 			$error++;
 		}
@@ -91,10 +102,13 @@ print '<tr class="liste_titre"><td>'.$langs->trans('Parameter').'</td><td>'.$lan
 print '<tr class="oddeven"><td>'.$langs->trans('SydTurnstileSitekey').'</td>';
 print '<td><input type="text" class="minwidth300" name="SYDTURNSTILE_SITEKEY" value="'.dol_escape_htmltag(getDolGlobalString('SYDTURNSTILE_SITEKEY')).'"></td></tr>';
 
-// El secret no se reimprime: si ya existe se muestra un marcador y solo se
-// sobrescribe cuando se escribe algo nuevo.
+// El secret no se reimprime en el HTML: si ya existe uno guardado se deja el campo vacio
+// con un placeholder y solo se sobrescribe cuando se envia un valor nuevo.
+$haySecret = (getDolGlobalString('SYDTURNSTILE_SECRET') !== '');
 print '<tr class="oddeven"><td>'.$langs->trans('SydTurnstileSecret').'</td>';
-print '<td><input type="password" class="minwidth300" name="SYDTURNSTILE_SECRET" value="'.dol_escape_htmltag(getDolGlobalString('SYDTURNSTILE_SECRET')).'" autocomplete="new-password"></td></tr>';
+print '<td><input type="password" class="minwidth300" name="SYDTURNSTILE_SECRET" value="" autocomplete="new-password"';
+print $haySecret ? ' placeholder="'.dol_escape_htmltag($langs->trans('SydTurnstileSecretKeep')).'"' : '';
+print '></td></tr>';
 
 print '<tr class="oddeven"><td>'.$langs->trans('SydTurnstileTheme').'</td><td>';
 $temas = array('auto' => 'auto', 'light' => 'light', 'dark' => 'dark');
